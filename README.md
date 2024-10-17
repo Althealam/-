@@ -1,19 +1,35 @@
-# 数据库技术课程项目——图书借阅系统
-## 一、数据表 
-### 1.借阅人
-证件号，姓名，类别（教师，学生），已借数目，电话<br>
-### 2.图书
-图书编号，书名，类别，是否借出<br>
-### 3.借阅信息
-证件号，图书编号，借出日期，应归还日期（计算字段），实际归还日期<br>
-## 二、功能设计
-1.创建视图显示所有逾期未归还的借阅信息（包括借阅人姓名，借阅人类别，书名，借出日期，应归还日期，逾期时长；<br>
-2.创建存储过程，每借出一本图书，向借阅信息表中加入一条记录；<br>
-3.创建存储过程，每归还一本图书，修改借阅信息表中相应的记录；<br>
-4.创建存储函数，根据图书编号查借阅人姓名，并调用该函数查询‘张三’已借未还的图书情况；<br>
-5.创建存储函数，计算某借阅人还能借阅的图书数目，学生限额5本，教师限额10本；<br>
-6.创建存储函数，查询某本图书逾期未还的时长，并调用该函数显示所有逾期未归还图书的书名，借阅人和逾期时长并按逾期时长排序；<br>
-7.创建存储函数，查询某借阅人有几本逾期未还图书，并调用该函数显示有逾期未归还图书的借阅人和未归还图书数目；<br>
-8.创建存储函数，利用游标计算计算某借阅人逾期未还图书应缴纳的罚款，逾期30日内罚款1元，逾期90日内罚款3元，逾期超过90日罚款5元。调用该函数显示所有应缴纳罚款的借阅人的姓名，逾期罚款和电话；<br>
-9.创建两个触发器，分别在借出或归还图书时，修改借阅人表中的已借数目字段；<br>
-10.创建触发器，当借阅者已借阅的书籍数目达到限额时，禁止借入新的书籍。<br>
+# Database Technology Course Project — Book Borrowing System
+
+## Overview
+This repository contains the source code for a **Book Borrowing System**, developed as a final project for my **Database Technology** course during my undergraduate studies. The system implements a library book borrowing system using SQL, featuring various stored functions, views, and triggers to handle borrowing records, overdue calculations, and borrowing limits.
+
+## Project Structure
+The project is composed of the following files:
+
+- **`table.sql`**: SQL script to create the necessary database tables for managing borrowers, books, and borrowing records.
+- **`function.sql`**: Contains stored functions and procedures to handle book borrowing and returning, overdue calculations, and user limits.
+
+## Data Tables
+The system uses three main tables:
+1. **Borrower**: Stores borrower information such as ID, name, category (teacher or student), number of books borrowed, and phone number.
+2. **Book**: Stores book details including ID, title, category, and whether the book is currently borrowed.
+3. **Borrowing Information**: Stores borrowing records with fields such as borrower ID, book ID, borrow date, calculated due date, and actual return date.
+
+## Features
+1. **Overdue Borrowing View**: Displays all overdue borrowings, including borrower name, category, book title, borrow date, due date, and overdue duration.
+2. **Borrow Book Procedure**: Adds a new record to the borrowing information table each time a book is borrowed.
+3. **Return Book Procedure**: Updates the relevant borrowing record when a book is returned.
+4. **Find Borrower by Book**: A function that retrieves the borrower's name using the book ID, allowing queries for borrowed books by specific users, such as 'Zhang San'.
+5. **Calculate Borrowing Limit**: A function to calculate how many more books a borrower can borrow. The limit is 5 books for students and 10 for teachers.
+6. **Overdue Duration Function**: Queries how long a book has been overdue, and sorts overdue books by duration, showing the book title, borrower, and overdue length.
+7. **Check Overdue Books**: A function to retrieve the number of overdue books for each borrower and display borrowers with overdue books and their counts.
+8. **Fine Calculation**: A cursor-based function that calculates overdue fines based on the length of the overdue period, where the fine is ¥1 for up to 30 days, ¥3 for up to 90 days, and ¥5 for over 90 days. It displays the borrower’s name, fine amount, and contact information.
+9. **Update Borrow Count Trigger**: A trigger that updates the number of books borrowed in the borrower table whenever a book is borrowed or returned.
+10. **Borrowing Limit Trigger**: A trigger that prevents borrowers from borrowing more books once they reach their borrowing limit.
+
+## How to Use
+1. First, run `table.sql` to create the required tables in your database.
+2. Then, execute `function.sql` to create the views, stored procedures, functions, and triggers for managing the book borrowing system.
+
+## Contact
+For further inquiries, feel free to reach out
